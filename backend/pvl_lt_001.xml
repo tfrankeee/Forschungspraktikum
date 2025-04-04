@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assessmentItem xmlns="http://www.imsglobal.org/xsd/imsqti_v2p1" 
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqti_v2p1 http://www.imsglobal.org/xsd/qti/qtiv2p1/imsqti_v2p1.xsd"
+                identifier="PVL_FIB_001" 
+                title="PVL Lückentext Frage 1" 
+                adaptive="false" 
+                timeDependent="false">
+  
+  <responseDeclaration identifier="RESPONSE" cardinality="multiple" baseType="string">
+    <correctResponse>
+      <value identifier="L1">Prüfungsvorleistung</value>
+      <value identifier="L2">Prüfungsleistung</value>
+      <value identifier="L3">Modul</value>
+    </correctResponse>
+  </responseDeclaration>
+
+  <outcomeDeclaration identifier="SCORE" cardinality="single" baseType="float">
+    <defaultValue>0</defaultValue>
+  </outcomeDeclaration>
+
+  <itemBody>
+    <p>Die <textEntryInteraction responseIdentifier="L1"/> (PVL) ist eine Voraussetzung für die Zulassung zur <textEntryInteraction responseIdentifier="L2"/>. Beide zusammen bilden in der Regel eine <textEntryInteraction responseIdentifier="L3"/> ab.</p>
+  </itemBody>
+
+  <responseProcessing template="http://www.imsglobal.org/question/qti_v2p1/rptemplates/map_response"/>
+</assessmentItem>

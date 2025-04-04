@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assessmentItem xmlns="http://www.imsglobal.org/xsd/imsqti_v2p1" 
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqti_v2p1 http://www.imsglobal.org/xsd/qti/qtiv2p1/imsqti_v2p1.xsd"
+                identifier="PVL_FT_001" 
+                title="PVL Freitext Frage 1" 
+                adaptive="false" 
+                timeDependent="false">
+  
+  <responseDeclaration identifier="RESPONSE" cardinality="single" baseType="string">
+    <correctResponse>
+      <value>Die Prüfungsvorleistung ist eine Voraussetzung für die Zulassung zur Prüfung und umfasst typischerweise Hausarbeiten, Referate oder Tests, während die Prüfungsleistung die eigentliche Abschlussprüfung darstellt.</value>
+    </correctResponse>
+  </responseDeclaration>
+
+  <outcomeDeclaration identifier="SCORE" cardinality="single" baseType="float">
+    <defaultValue>0</defaultValue>
+  </outcomeDeclaration>
+
+  <itemBody>
+    <extendedTextInteraction responseIdentifier="RESPONSE">
+      <prompt>Erklären Sie den Unterschied zwischen Prüfungsvorleistung (PVL) und Prüfungsleistung nach Hollas in eigenen Worten.</prompt>
+    </extendedTextInteraction>
+  </itemBody>
+
+  <responseProcessing>
+    <setOutcomeValue identifier="SCORE">
+      <mapResponse identifier="RESPONSE">
+        <mapEntry mapKey="Die Prüfungsvorleistung ist eine Voraussetzung für die Zulassung zur Prüfung und umfasst typischerweise Hausarbeiten, Referate oder Tests, während die Prüfungsleistung die eigentliche Abschlussprüfung darstellt." mappedValue="1"/>
+        <mapEntry mapKey="*" mappedValue="0"/>
+      </mapResponse>
+    </setOutcomeValue>
+  </responseProcessing>
+</assessmentItem>
