@@ -30,7 +30,7 @@ export default {
         status: "interacting"
       }
 
-      fetch("questions/frage1.xml")
+      fetch("questions/frage2.xml")
         .then((res) => res.text())
         .then((xml) => {
           this.qti3Player.loadItemFromXml(xml, config)
