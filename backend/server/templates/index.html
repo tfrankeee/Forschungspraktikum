@@ -1,0 +1,39 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTMX Flask Example</title>
+    <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
+    <style>
+        body {
+            padding: 20px;
+            background-color: #383737;
+            color: #FFF;
+        }
+        pre {
+            background-color: #2b2b2b;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            white-space: pre-wrap; /* Ensures long lines wrap */
+        }
+    </style>
+</head>
+<body>
+    <h1>QTI Generator</h1>
+    
+    <button hx-get="/text-entry" hx-target="#result">
+        Lückentext QTI-Datei erstellen!
+    </button>
+    <button hx-get="/single-choice" hx-target="#result">
+        Einfachauswahl QTI-Datei erstellen!
+    </button>
+    <button hx-get="/multiple-choice" hx-target="#result">
+        Mehrfachauswahl QTI-Datei erstellen!
+    </button>
+    <br>
+    <div id="result" style="width: 100%; height: 300px;"></div>
+</body>
+</html>

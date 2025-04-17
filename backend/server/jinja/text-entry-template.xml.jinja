@@ -1,0 +1,26 @@
+<qti-assessment-item 
+ xmlns="http://www.imsglobal.org/xsd/qti/imsqtiasi_v3p0" 
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqtiasi_v3p0 
+ https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_itemv3p0p1_v1p0.xsd"
+ identifier="{{ identifier }}"
+ title="{{ title }}"
+ time-dependent="false" 
+ xml:lang="de-DE">
+ <qti-response-declaration identifier="RESPONSE" base-type="string" cardinality="single">
+  <qti-correct-response>
+   <qti-value>{{ response_value }}</qti-value>
+  </qti-correct-response>
+  <qti-mapping default-value="0">
+   <qti-map-entry map-key="{{ score }}" mapped-value="{{ score_value }}" case-sensitive="true" />
+  </qti-mapping>
+ </qti-response-declaration>
+ <qti-outcome-declaration base-type="float" cardinality="single" identifier="SCORE" />
+ <qti-item-body>
+  <p>Ergänzen Sie die Lücken im Text</p>
+  <div>
+    <p>{{ text_pre_gap }}<qti-text-entry-interaction response-identifier="RESPONSE" /> {{ text_post_gap }}</p>
+  </div>
+ </qti-item-body>
+ <qti-response-processing template="" />
+</qti-assessment-item>

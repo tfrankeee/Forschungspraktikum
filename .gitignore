@@ -24,3 +24,8 @@ pnpm-debug.log*
 *.sw?
 
 package-lock.json
+
+
+# Backend
+backend/env
+backend/server/__pycache__/

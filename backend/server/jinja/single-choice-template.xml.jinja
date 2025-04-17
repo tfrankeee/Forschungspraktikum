@@ -1,0 +1,25 @@
+<qti-assessment-item
+ xmlns="http://www.imsglobal.org/xsd/qti/imsqtiasi_v3p0"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.imsglobal.org/xsd/qti/imsqtiasi_v3p0 
+ https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_itemv3p0p1_v1p0.xsd"
+ identifier="{{ identifier }}"
+ title="{{ title }}"
+ time-dependent="false"
+ xml:lang="de-DE">
+ <qti-response-declaration identifier="RESPONSE" base-type="identifier" cardinality="single">
+  <qti-correct-response>
+   <qti-value>{{ correct_choice }}</qti-value>
+  </qti-correct-response>
+ </qti-response-declaration>
+ <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float" />
+ <qti-item-body>
+  <p>{{ question }}</p>
+  <qti-choice-interaction response-identifier="RESPONSE" shuffle="true" max-choices="1">
+   {%- for choice in choices %}
+   <qti-simple-choice identifier="{{ choice.identifier }}">{{ choice.text }}</qti-simple-choice>
+   {%- endfor %}
+  </qti-choice-interaction>
+ </qti-item-body>
+ <qti-response-processing template="match-correct" />
+</qti-assessment-item>
