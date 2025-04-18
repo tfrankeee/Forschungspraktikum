@@ -85,7 +85,6 @@
           <button 
             v-if="currentIndex !== questionList.length - 1"
             @click="nextQuestion"
-            :disabled="currentIndex === questionList.length - 1"
           >
             Next
           </button>
@@ -106,7 +105,7 @@
       <div v-else class="results">
         <h2>Test Results</h2>
         <div class="score-summary">
-          <p>You scored {{ score }} out of {{ questionList.length }} ({{ percentage }}%)</p>
+          <p>You scored {{ score.toFixed(2) }} out of {{ questionList.length }} ({{ percentage }}%)</p>
         </div>
         
         <div v-for="(question, index) in questionList" :key="index" class="question-result">
@@ -123,6 +122,13 @@
             <div class="correct-answer">
               <strong>Correct answer:</strong> 
               {{ displayCorrectAnswer(index) }}
+            </div>
+            <div class="points-earned">
+              <strong>Points:</strong> 
+              {{ questionPoints[index].toFixed(2) }}/1
+              <span v-if="questionPoints[index] > 0 && questionPoints[index] < 1" class="partial-credit">
+                (Partial credit)
+              </span>
             </div>
           </div>
         </div>
@@ -148,6 +154,7 @@ export default {
       currentIndex: 0,
       questionsData: [],
       userAnswers: [],
+      questionPoints: [],
       testEnded: false,
       loading: false,
       error: null
@@ -173,9 +180,7 @@ export default {
       return this.questionsData[this.currentIndex]?.fillBlankText || '';
     },
     score() {
-      return this.questionList.reduce((total, _, index) => {
-        return total + (this.isAnswerCorrect(index) ? 1 : 0);
-      }, 0);
+      return this.questionPoints.reduce((total, points) => total + points, 0);
     },
     percentage() {
       return Math.round((this.score / this.questionList.length) * 100);
@@ -190,6 +195,7 @@ export default {
       this.error = null;
       this.questionsData = [];
       this.userAnswers = Array(this.questionList.length).fill(undefined);
+      this.questionPoints = Array(this.questionList.length).fill(0);
       
       try {
         for (const q of this.questionList) {
@@ -279,50 +285,69 @@ export default {
     },
     
     handleMultipleChoiceChange() {
-      // Ensure userAnswers[currentIndex] is always an array for multiple choice questions
       if (!Array.isArray(this.userAnswers[this.currentIndex])) {
         this.$set(this.userAnswers, this.currentIndex, []);
       }
     },
     
     endTest() {
+      this.questionPoints = this.questionList.map((_, index) => 
+        this.calculateQuestionPoints(index)
+      );
       this.testEnded = true;
     },
     
-    restartTest() {
-      this.userAnswers = Array(this.questionList.length).fill(undefined);
-      this.currentIndex = 0;
-      this.testEnded = false;
-    },
-    
-    isAnswerCorrect(index) {
+    calculateQuestionPoints(index) {
       const userAnswer = this.userAnswers[index];
       const question = this.questionsData[index];
       
       if (userAnswer === undefined || userAnswer === null || userAnswer === '') {
-        return false;
+        return 0;
       }
       
       switch (question.type) {
         case 'single-choice':
-        case 'true-false':
-          return userAnswer === question.correctAnswer;
-        case 'multiple-choice':
-          return Array.isArray(userAnswer) && 
-                 JSON.stringify([...userAnswer].sort()) === 
-                 JSON.stringify([...question.correctAnswers].sort());
-        case 'string-answer':
-          return userAnswer.trim().toLowerCase() === 'niklaus wirth' || 
-                 userAnswer.trim().toLowerCase() === 'wirth';
-        case 'fill-blank':
-          return userAnswer.trim().toLowerCase() === 'de morgan';
-        default:
-          return false;
+        case 'true-false': {
+          return userAnswer === question.correctAnswer ? 1 : 0;
+        }
+          
+        case 'multiple-choice': {
+          if (!Array.isArray(userAnswer)) return 0;
+          
+          const totalCorrect = question.correctAnswers.length;
+          const userCorrect = userAnswer.filter(ans => 
+            question.correctAnswers.includes(ans)).length;
+          const userIncorrect = userAnswer.filter(ans => 
+            !question.correctAnswers.includes(ans)).length;
+          
+          return Math.max(0, (userCorrect - userIncorrect) / totalCorrect);
+        }
+          
+        case 'string-answer': {
+          if (userAnswer.trim().toLowerCase() === 'niklaus wirth') return 1;
+          if (userAnswer.trim().toLowerCase() === 'wirth') return 0.8;
+          return 0;
+        }
+          
+        case 'fill-blank': {
+          return userAnswer.trim().toLowerCase() === 'de morgan' ? 1 : 0;
+        }
+          
+        default: {
+          return 0;
+        }
       }
     },
     
+    restartTest() {
+      this.userAnswers = Array(this.questionList.length).fill(undefined);
+      this.questionPoints = Array(this.questionList.length).fill(0);
+      this.currentIndex = 0;
+      this.testEnded = false;
+    },
+    
     getAnswerClass(index) {
-      return this.isAnswerCorrect(index) ? 'correct' : 'incorrect';
+      return this.questionPoints[index] > 0 ? 'correct' : 'incorrect';
     },
     
     displayUserAnswer(index) {
@@ -360,7 +385,7 @@ export default {
           return question.correctAnswers.map(ans => 
             this.displayChoiceAnswer(ans, question)).join(', ');
         case 'string-answer':
-          return '"Niklaus Wirth" or "Wirth"';
+          return '"Niklaus Wirth" (1.0) or "Wirth" (0.8)';
         case 'fill-blank':
           return `"${question.correctAnswer}"`;
         default:
@@ -497,7 +522,7 @@ textarea, input[type="text"] {
   margin-top: 15px;
 }
 
-.user-answer, .correct-answer {
+.user-answer, .correct-answer, .points-earned {
   margin: 8px 0;
 }
 
@@ -509,6 +534,11 @@ textarea, input[type="text"] {
 .incorrect {
   color: #e74c3c;
   font-weight: bold;
+}
+
+.partial-credit {
+  color: #f39c12;
+  font-style: italic;
 }
 
 .restart-btn {

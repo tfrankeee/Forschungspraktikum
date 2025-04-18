@@ -6,6 +6,12 @@
       <value>opt1</value>
       <value>opt3</value>
     </correctResponse>
+    <!-- NEW: Add mapping for partial credit -->
+    <mapping defaultValue="0">
+      <mapEntry mapKey="opt1" mappedValue="0.5"/>
+      <mapEntry mapKey="opt3" mappedValue="0.5"/>
+      <mapEntry mapKey="opt1 opt3" mappedValue="1"/>
+    </mapping>
   </responseDeclaration>
   <itemBody>
     <choiceInteraction responseIdentifier="RESPONSE" shuffle="false" maxChoices="0">

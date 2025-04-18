@@ -1,14 +1,15 @@
 <assessmentItem xmlns="http://www.imsglobal.org/xsd/imsqti_v3p0" 
                identifier="string1" 
-               title="Programming Languages"
-               points="1">
+               title="Programming Languages">
   <responseDeclaration identifier="RESPONSE" cardinality="single" baseType="string">
     <correctResponse>
       <value>Niklaus Wirth</value>
     </correctResponse>
+    <!-- NEW: Flexible scoring -->
     <mapping defaultValue="0">
       <mapEntry mapKey="Niklaus Wirth" mappedValue="1"/>
       <mapEntry mapKey="Wirth" mappedValue="0.8"/>
+      <mapEntry mapKey="N. Wirth" mappedValue="0.9"/>
     </mapping>
   </responseDeclaration>
   <itemBody>
