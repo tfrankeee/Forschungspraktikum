@@ -1,0 +1,19 @@
+<assessmentItem xmlns="http://www.imsglobal.org/xsd/imsqti_v3p0" 
+               identifier="multi1" 
+               title="Data Structures">
+  <responseDeclaration identifier="RESPONSE" cardinality="multiple" baseType="identifier">
+    <correctResponse>
+      <value>opt1</value>
+      <value>opt3</value>
+    </correctResponse>
+  </responseDeclaration>
+  <itemBody>
+    <choiceInteraction responseIdentifier="RESPONSE" shuffle="false" maxChoices="0">
+      <prompt>Select all linear data structures:</prompt>
+      <simpleChoice identifier="opt1">Array</simpleChoice>
+      <simpleChoice identifier="opt2">Binary Tree</simpleChoice>
+      <simpleChoice identifier="opt3">Linked List</simpleChoice>
+      <simpleChoice identifier="opt4">Graph</simpleChoice>
+    </choiceInteraction>
+  </itemBody>
+</assessmentItem>

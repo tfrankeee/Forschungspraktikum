@@ -1,0 +1,16 @@
+<assessmentItem xmlns="http://www.imsglobal.org/xsd/imsqti_v3p0" 
+               identifier="tf1" 
+               title="Computer Architecture">
+  <responseDeclaration identifier="RESPONSE" cardinality="single" baseType="boolean">
+    <correctResponse>
+      <value>true</value>
+    </correctResponse>
+  </responseDeclaration>
+  <itemBody>
+    <choiceInteraction responseIdentifier="RESPONSE" shuffle="false" maxChoices="1">
+      <prompt>The ALU (Arithmetic Logic Unit) performs arithmetic and logical operations in a CPU.</prompt>
+      <simpleChoice identifier="true">True</simpleChoice>
+      <simpleChoice identifier="false">False</simpleChoice>
+    </choiceInteraction>
+  </itemBody>
+</assessmentItem>

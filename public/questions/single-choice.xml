@@ -1,0 +1,18 @@
+<assessmentItem xmlns="http://www.imsglobal.org/xsd/imsqti_v3p0" 
+               identifier="single1" 
+               title="Big-O Notation">
+  <responseDeclaration identifier="RESPONSE" cardinality="single" baseType="identifier">
+    <correctResponse>
+      <value>opt3</value>
+    </correctResponse>
+  </responseDeclaration>
+  <itemBody>
+    <choiceInteraction responseIdentifier="RESPONSE" shuffle="false" maxChoices="1">
+      <prompt>Which of the following represents the time complexity of a binary search algorithm?</prompt>
+      <simpleChoice identifier="opt1">O(n)</simpleChoice>
+      <simpleChoice identifier="opt2">O(n²)</simpleChoice>
+      <simpleChoice identifier="opt3">O(log n)</simpleChoice>
+      <simpleChoice identifier="opt4">O(1)</simpleChoice>
+    </choiceInteraction>
+  </itemBody>
+</assessmentItem>

@@ -1,0 +1,14 @@
+<assessmentItem xmlns="http://www.imsglobal.org/xsd/imsqti_v3p0" 
+               identifier="fill1" 
+               title="Boolean Algebra">
+  <responseDeclaration identifier="RESPONSE" cardinality="single" baseType="string">
+    <correctResponse>
+      <value>De Morgan</value>
+    </correctResponse>
+  </responseDeclaration>
+  <itemBody>
+    <textEntryInteraction responseIdentifier="RESPONSE">
+      <p>The __________ laws describe how to distribute negation over conjunction and disjunction.</p>
+    </textEntryInteraction>
+  </itemBody>
+</assessmentItem>
