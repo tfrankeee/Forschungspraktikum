@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qti-assessment-item 
+  xmlns="http://www.imsglobal.org/xsd/qti/imsqtiasi_v3p0" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsglobal.org/xsd/qti/imsqtiasi_v3p0 
+  https://purl.imsglobal.org/spec/qti/v3p0/schema/xsd/imsqti_itemv3p0p1_v1p0.xsd"
+  identifier="c_for_loop_syntax_order"
+  title="C for loop syntax order"
+  time-dependent="false"
+  xml:lang="en-US">
+
+  <qti-response-declaration identifier="RESPONSE" cardinality="ordered" base-type="identifier">
+    <qti-correct-response>
+      <qti-value>for</qti-value>
+      <qti-value>paren-open</qti-value>
+      <qti-value>init</qti-value>
+      <qti-value>condition</qti-value>
+      <qti-value>increment</qti-value>
+      <qti-value>paren-close</qti-value>
+      <qti-value>body</qti-value>
+    </qti-correct-response>
+  </qti-response-declaration>
+
+  <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float" />
+
+  <qti-item-body>
+    <p>Arrange the parts of the C <code>for</code> loop in the correct order:</p>
+    <qti-order-interaction response-identifier="RESPONSE" shuffle="true">
+      <qti-simple-choice identifier="for">for</qti-simple-choice>
+      <qti-simple-choice identifier="paren-open">(</qti-simple-choice>
+      <qti-simple-choice identifier="init">int i = 0;</qti-simple-choice>
+      <qti-simple-choice identifier="condition">i &lt; 10;</qti-simple-choice>
+      <qti-simple-choice identifier="increment">i++;</qti-simple-choice>
+      <qti-simple-choice identifier="paren-close">)</qti-simple-choice>
+      <qti-simple-choice identifier="body">{ printf("%d ", i); }</qti-simple-choice>
+    </qti-order-interaction>
+  </qti-item-body>
+
+  <qti-response-processing template="https://purl.imsglobal.org/spec/qti/v3p0/rptemplates/match_correct" />
+</qti-assessment-item>

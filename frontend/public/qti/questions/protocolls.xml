@@ -1,0 +1,27 @@
+<qti-assessment-item identifier="protokolle" title="Protokolle" adaptive="false" time-dependent="false">
+  <qti-response-declaration identifier="RESPONSE" cardinality="multiple" base-type="identifier">
+    <qti-correct-response>
+      <qti-value>HTTP</qti-value>
+      <qti-value>FTP</qti-value>
+      <qti-value>SMTP</qti-value>
+    </qti-correct-response>
+  </qti-response-declaration>
+
+  <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
+    <qti-default-value>
+      <qti-value>0</qti-value>
+    </qti-default-value>
+  </qti-outcome-declaration>
+
+  <qti-item-body>
+    <qti-choice-interaction response-identifier="RESPONSE" max-choices="3">
+      <qti-prompt>Welche Protokolle gehören zum TCP/IP-Modell?</qti-prompt>
+      <qti-simple-choice identifier="HTTP">HTTP</qti-simple-choice>
+      <qti-simple-choice identifier="FTP">FTP</qti-simple-choice>
+      <qti-simple-choice identifier="SMTP">SMTP</qti-simple-choice>
+      <qti-simple-choice identifier="Bluetooth">Bluetooth</qti-simple-choice>
+    </qti-choice-interaction>
+  </qti-item-body>
+
+  <qti-response-processing template="https://purl.imsglobal.org/spec/qti/v3p0/rptemplates/match_correct"/>
+</qti-assessment-item>

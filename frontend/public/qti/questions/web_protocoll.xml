@@ -1,0 +1,23 @@
+<qti-assessment-item identifier="https" title="Sicheres Web-Protokoll" adaptive="false" time-dependent="false">
+  <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="string">
+    <qti-correct-response>
+      <qti-value>HTTPS</qti-value>
+    </qti-correct-response>
+  </qti-response-declaration>
+
+  <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
+    <qti-default-value>
+      <qti-value>0</qti-value>
+    </qti-default-value>
+  </qti-outcome-declaration>
+
+  <qti-item-body>
+    <p>
+      Das Protokoll zur sicheren Übertragung im Web heißt
+      <qti-text-entry-interaction response-identifier="RESPONSE" expected-length="10"/>
+    </p>
+  </qti-item-body>
+
+    <qti-response-processing template="https://purl.imsglobal.org/spec/qti/v3p0/rptemplates/match_correct"/>
+
+</qti-assessment-item>

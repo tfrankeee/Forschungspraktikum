@@ -1,0 +1,25 @@
+<qti-assessment-item identifier="router" title="Router Aufgabe" adaptive="false" time-dependent="false">
+  <qti-response-declaration identifier="RESPONSE" cardinality="single" base-type="identifier">
+    <qti-correct-response>
+      <qti-value>choice2</qti-value>
+    </qti-correct-response>
+  </qti-response-declaration>
+
+  <qti-outcome-declaration identifier="SCORE" cardinality="single" base-type="float">
+    <qti-default-value>
+      <qti-value>1.0</qti-value>
+    </qti-default-value>
+  </qti-outcome-declaration>
+
+  <qti-item-body>
+    <qti-choice-interaction response-identifier="RESPONSE" shuffle="false" max-choices="1">
+      <qti-prompt>Was ist die Aufgabe eines Routers im Netzwerk?</qti-prompt>
+      <qti-simple-choice identifier="choice0">Verwalten von Datenbanken</qti-simple-choice>
+      <qti-simple-choice identifier="choice1">Speichern von Passwörtern</qti-simple-choice>
+      <qti-simple-choice identifier="choice2">Weiterleiten von Datenpaketen</qti-simple-choice>
+      <qti-simple-choice identifier="choice3">Blockieren von Webseiten</qti-simple-choice>
+    </qti-choice-interaction>
+  </qti-item-body>
+
+  <qti-response-processing template="https://purl.imsglobal.org/spec/qti/v3p0/rptemplates/match_correct"/>
+</qti-assessment-item>
