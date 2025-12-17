@@ -8,11 +8,12 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'Home',
     component: Home,
     meta: {
-      title: 'Test Runner Home'
+      title: 'Test Runner Home',
+      requiresAuth: false
     }
   },
   {
@@ -23,7 +24,8 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "test" */ '../views/TestRunner.vue'),
     meta: {
-      title: 'Test Runner'
+      title: 'Test Runner',
+      requiresAuth: true
     }
   },
   {
@@ -56,8 +58,12 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title || 'Test Runner Home'
-  next()
-});
+  const token = localStorage.getItem("access_token");
 
+  if (to.matched.some((record) => record.meta.requiresAuth) && !token) {
+    next("/login");
+  } else {
+    next();
+  }
+});
 export default router
