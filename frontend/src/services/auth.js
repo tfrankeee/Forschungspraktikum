@@ -1,5 +1,14 @@
 import {api} from "./api";
 
+export async function register({email, username, password}){
+    await api.post("/register", {
+        email,
+        username,
+        password
+    })
+}
+
+// Login (OAuth2PasswordRequestForm!)
 export async function login(identifier, password){
     const body = new URLSearchParams();
     body.append("username", identifier);

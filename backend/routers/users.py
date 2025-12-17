@@ -19,7 +19,7 @@ from config.logger_config import logger
 router = APIRouter(prefix="/users", tags=["users"])
 
 
-@router.post("/", response_model=UserRead, status_code=201)
+@router.post("/register", response_model=UserRead, status_code=201)
 def create_user(
     user_create: UserCreate,
     session: SessionDep
