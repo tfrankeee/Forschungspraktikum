@@ -6,7 +6,7 @@ def test_create_user(client):
         "email": "test@example.com",
         "password": "secret123"
     }
-    response_create = client.post("/users/", json=user)
+    response_create = client.post("/users/register", json=user)
 
     assert response_create.status_code == 201, response_create.text
     data = response_create.json()
@@ -23,7 +23,7 @@ def test_create_user_no_username(client):
         "email": "test@example.com",
         "password": "secret123"
     }
-    response_create = client.post("/users/", json=user)
+    response_create = client.post("/users/register", json=user)
 
     assert response_create.status_code == 422, response_create.text
 
@@ -33,7 +33,7 @@ def test_create_user_without_password(client):
         "username": "alice",
         "email": "alice@example.de"
     }
-    response_create = client.post("/users/", json=user)
+    response_create = client.post("/users/register", json=user)
 
     assert response_create.status_code == 422, response_create.text
 
@@ -51,8 +51,8 @@ def test_create_two_user_with_same_username(client):
     }
 
     # create users
-    response_create1 = client.post("/users/", json=user1)
-    response_create2 = client.post("/users/", json=user2)
+    response_create1 = client.post("/users/register", json=user1)
+    response_create2 = client.post("/users/register", json=user2)
 
     assert response_create1.status_code == 201, response_create1.text
     assert response_create2.status_code == 400, response_create2.text  # Bad Request due to duplicate username
@@ -72,8 +72,8 @@ def test_get_users(client):
     }
 
     # create users
-    response_create1 = client.post("/users/", json=user1)
-    response_create2 = client.post("/users/", json=user2)
+    response_create1 = client.post("/users/register", json=user1)
+    response_create2 = client.post("/users/register", json=user2)
 
     assert response_create1.status_code == 201, response_create1.text
     assert response_create2.status_code == 201, response_create2.text
@@ -117,7 +117,7 @@ def test_get_user(client):
         "email": "test@test.de",
         "password": "password123"
     }
-    response_create = client.post("/users/", json=user)
+    response_create = client.post("/users/register", json=user)
     assert response_create.status_code == 201, response_create.text
 
     created = response_create.json()
@@ -152,7 +152,7 @@ def test_get_nonexistent_user(client):
         "email": "test@test.de",
         "password": "password123"
     }
-    response_create = client.post("/users/", json=user)
+    response_create = client.post("/users/register", json=user)
     assert response_create.status_code == 201, response_create.text
 
     response_login = client.post("/users/login", 
@@ -175,7 +175,7 @@ def test_update_user(client):
         "email": "test@test.de",
         "password": "password123"
     }
-    response_create = client.post("/users/", json=user)
+    response_create = client.post("/users/register", json=user)
     assert response_create.status_code == 201, response_create.text
 
     # get the created user's ID
@@ -207,7 +207,7 @@ def test_update_user_with_empty_username(client):
         "email": "test@test.de",
         "password": "password123"
     }
-    response_create = client.post("/users/", json=user)
+    response_create = client.post("/users/register", json=user)
     assert response_create.status_code == 201, response_create.text
 
     # get the created user's ID
