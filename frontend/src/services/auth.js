@@ -1,7 +1,7 @@
 import {api} from "./api";
 
 export async function register({email, username, password}){
-    await api.post("/register", {
+    await api.post("users/register", {
         email,
         username,
         password
@@ -14,7 +14,7 @@ export async function login(identifier, password){
     body.append("username", identifier);
     body.append("password", password);
 
-    const response = await api.post("/login", body, {
+    const response = await api.post("users/login", body, {
         headers:  { "Content-Type": "application/x-www-form-urlencoded" },
     });
 
