@@ -3,9 +3,13 @@
         <label :for="inputId" class="password-label">{{ label }}</label>
 
         <div class="input-wrapper">
-            <input :type="inputType"
-                   v-model="password"
-                   class="w-100" />
+            <input 
+                :id="inputId"
+                :type="inputType"
+                :value="value"
+                @input="$emit('input', $event.target.value)"
+                v-model="password"
+                class="w-100" />
 
             <button type="button"
                     class="toggle-button"
@@ -13,12 +17,12 @@
                     :aria-label="showPassword ? 'Passwort verbergen' : 'Passwort anzeigen'">
                 <!-- visible -->
                 <EyeIcon role="img" 
-                         v-if="showPassword && password" 
+                         v-if="showPassword && value" 
                          class="icon"
                          alt="Passwort ausblenden"/>
                 <!-- hidden -->
                 <EyeOffIcon role="img" 
-                            v-if="!showPassword && password" 
+                            v-if="!showPassword && value" 
                             class="icon" 
                             alt="Passwort anzeigen"/>
 
@@ -34,7 +38,8 @@
     export default {
         name: 'PasswordInput',
         props: {
-            label: { type: String, required: true }
+            label: { type: String, required: true },
+            value: { type: String, default: ""},
         },
         components: {
             EyeIcon,
@@ -50,7 +55,7 @@
         computed: {
             inputType() {
                 if (this.showPassword) return 'text';
-                if (!this.password) return 'text';
+                if (!this.value) return 'text';
                 return 'password';
             }
         }
