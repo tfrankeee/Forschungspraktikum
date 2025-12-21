@@ -11,6 +11,7 @@
                 <PasswordInput label="Passwort" v-model="password"/>
             </div>
         </div>
+        
         <p v-if="error" class="text-danger">{{ error }}</p>
             
         <button class="mt-5 primary" :disabled="loading">
@@ -44,9 +45,10 @@
                     await login(this.identifier, this.password);
                     this.$router.push("/")
                 } catch(err){
-                    err?.response?.data?.detail ||
-                    err?.message || 
-                    "Login fehlgeschlagen";
+                    this.error =
+                        err?.response?.data?.detail ||
+                        err?.message ||
+                        "Login fehlgeschlagen";
                 }finally{
                     this.loading = false;
                 }
