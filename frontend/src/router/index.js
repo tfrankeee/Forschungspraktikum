@@ -6,6 +6,7 @@ import Login from '../views/LoginRegistrationView.vue'
 
 Vue.use(VueRouter)
 
+//TODO: add "requiresAuth" for specific sites to handle expired tokens
 const routes = [
   {
     path: '/',
@@ -33,11 +34,12 @@ const routes = [
     name: 'form',
     component: Test,
     meta: {
-      title: 'Test erstellen'
+      title: 'Test erstellen',
+      requiresAuth: true
     }
   },
   {
-    path: '/login',
+    path: '/login-or-register',
     name: 'Login/Registrierung',
     component: Login,
     meta: {
@@ -57,13 +59,36 @@ const router = new VueRouter({
   routes
 })
 
+// handling expired tokens
+function isTokenExpired(token) {
+  try {
+    const payloadPart = token.split(".")[1];
+    const payloadJson = atob(payloadPart.replace(/-/g, "+").replace(/_/g, "/"));
+    const payload = JSON.parse(payloadJson);
+
+    if (!payload.exp) return false; 
+    const now = Math.floor(Date.now() / 1000);
+    return payload.exp <= now;
+  } catch (e) {
+    return true;
+  }
+}
+
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem("access_token");
 
-  if (to.matched.some((record) => record.meta.requiresAuth) && !token) {
-    next("/login");
-  } else {
-    next();
+  if (token && isTokenExpired(token)) {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("access_token_expires_at");
   }
+
+  const hasToken = !!localStorage.getItem("access_token");
+
+  if (to.matched.some(r => r.meta.requiresAuth) && !hasToken) {
+    return next("/login");
+  }
+
+  next();
 });
+
 export default router
