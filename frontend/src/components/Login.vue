@@ -11,8 +11,8 @@
                 <PasswordInput label="Passwort" v-model="password"/>
             </div>
         </div>
-        
-        <p v-if="error" class="text-danger">{{ error }}</p>
+
+        <p v-if="error" class="text-danger mt-2">{{ error }}</p>
             
         <button class="mt-5 primary" :disabled="loading">
             {{loading ? "Einloggen ..." : "Einloggen"}}</button>
